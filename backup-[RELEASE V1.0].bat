@@ -60,7 +60,9 @@ CLS
 
 %DRIVEB%
 cd /
-mkdir Backup
+set /p BACKUPDIR=Enter a name for the backup folder(default=Backup:
+echo %BACKUPDIR%
+mkdir %BACKUPDIR%
 CLS
 CHOICE /C yn /N /M "Back up only user files [y:n] ?"
 		IF ERRORLEVEL 1 SET userfiles=y
