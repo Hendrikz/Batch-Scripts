@@ -57,11 +57,15 @@ CLS
 		IF ERRORLEVEL 24 SET DRIVEB=X:
 		IF ERRORLEVEL 25 SET DRIVEB=Y:
 		IF ERRORLEVEL 26 SET DRIVEB=Z:
-
-%DRIVEB%
+CLS
 cd /
-set /p BACKUPDIR=Enter a name for the backup folder(default=Backup:
+set /p BACKUPDIR=Enter a name for the backup folder(default=Backup):
+CLS
 echo %BACKUPDIR%
+	CHOICE /C yn /N /M "Is this the correct folder name? [Y:N]"
+		IF ERRORLEVEL 1 SET DRIVEB=A:
+		IF ERRORLEVEL 2 SET DRIVEB=B:
+CLS
 mkdir %BACKUPDIR%
 CLS
 CHOICE /C yn /N /M "Back up only user files [y:n] ?"
@@ -73,8 +77,8 @@ if %userfiles%==n goto allfilesbackup
 
 :allfilesbackup
 CLS
-xcopy /R /E /H /Y /D /C /F "%DRIVE%/" "%DRIVEB%/backup"
-attrib -h -s "%DRIVEB%/backup"
+xcopy /R /E /H /Y /D /C /F "%DRIVE%/" "%DRIVEB%/%BACKUPDIR%"
+attrib -h -s "%DRIVEB%/%BACKUPDIR%"
 pause
 CLS
 echo Backup of all your files is now complete
@@ -85,8 +89,8 @@ exit
 :userfilesonly
 CLS
 set /p USERNAME= What is the USERNAME you want to backup?
-xcopy /R /E /H /Y /C /D /F "%DRIVE%/users/%USERNAME%" "%DRIVEB%/backup/%USERNAME%"
-attrib -h -s "%DRIVEB%/backup/%USERNAME%"
+xcopy /R /E /H /Y /C /D /F "%DRIVE%/users/%USERNAME%" "%DRIVEB%/%BACKUPDIR%/%USERNAME%"
+attrib -h -s "%DRIVEB%/%BACKUPDIR%/%USERNAME%"
 pause
 CLS
 echo Backup of all your user files are now complete
