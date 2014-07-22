@@ -1,5 +1,5 @@
 @ECHO OFF
-TITLE USB Shortcut Virus Fix [RELEASE V1.0]
+TITLE USB Shortcut Virus Fix [RELEASE V1.1]
 
 :NODRIVE
 CLS

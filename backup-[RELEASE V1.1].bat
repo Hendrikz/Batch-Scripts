@@ -1,7 +1,7 @@
-@echo off
-title Backup your hardrive [RELEASE V1.0]
-color 02
-:start
+@ECHO OFF
+TITLE Backup your hardrive [RELEASE V1.1]
+COLOR 02
+:START
 	CHOICE /C ABCDEFGHIJKLMNOPQRSTUVWXYZ /N /M "Choose the drive you want to BACKUP: [A, B, C, D:, E, F, G, H, I ...?]"
 		IF ERRORLEVEL 1 SET DRIVE=A:
 		IF ERRORLEVEL 2 SET DRIVE=B:
@@ -58,42 +58,42 @@ CLS
 		IF ERRORLEVEL 25 SET DRIVEB=Y:
 		IF ERRORLEVEL 26 SET DRIVEB=Z:
 CLS
-cd /
-set /p BACKUPDIR=Enter a name for the backup folder(default=Backup):
+CD /
+SET /p BACKUPDIR=Enter a name for the backup folder(default=Backup):
 CLS
-echo %BACKUPDIR%
+ECHO %BACKUPDIR%
 	CHOICE /C yn /N /M "Is this the correct folder name? [Y:N]"
 		IF ERRORLEVEL 1 SET DRIVEB=A:
 		IF ERRORLEVEL 2 SET DRIVEB=B:
 CLS
-mkdir %BACKUPDIR%
+MKDIR %BACKUPDIR%
 CLS
 CHOICE /C yn /N /M "Back up only user files [y:n] ?"
-		IF ERRORLEVEL 1 SET userfiles=y
-		IF ERRORLEVEL 2 SET userfiles=n
+		IF ERRORLEVEL 1 SET USERFILES=y
+		IF ERRORLEVEL 2 SET USERFILES=n
 
-if %userfiles%==y goto userfilesonly
-if %userfiles%==n goto allfilesbackup
+IF %USERFILES%==y GOTO USERFILESONLY
+if %USERFILES%==n GOTO ALLFILESBACKUP
 
-:allfilesbackup
+:ALLFILESBACKUP
 CLS
-xcopy /R /E /H /Y /D /C /F "%DRIVE%/" "%DRIVEB%/%BACKUPDIR%"
-attrib -h -s "%DRIVEB%/%BACKUPDIR%"
-pause
+XCOPY /R /E /H /Y /D /C /F "%DRIVE%/" "%DRIVEB%/%BACKUPDIR%"
+ATTRIB -H -S "%DRIVEB%/%BACKUPDIR%"
+PAUSE
 CLS
-echo Backup of all your files is now complete
-Echo Completed on %DATE% %TIME%
-pause
-exit
+ECHO Backup of all your files is now complete
+ECHO Completed on %DATE% %TIME%
+PAUSE
+EXIT
 
-:userfilesonly
+:USERFILESONLY
 CLS
-set /p USERNAME= What is the USERNAME you want to backup?
-xcopy /R /E /H /Y /C /D /F "%DRIVE%/users/%USERNAME%" "%DRIVEB%/%BACKUPDIR%/%USERNAME%"
-attrib -h -s "%DRIVEB%/%BACKUPDIR%/%USERNAME%"
-pause
+SET /p USERNAME= What is the USERNAME you want to backup?
+XCOPY /R /E /H /Y /C /D /F "%DRIVE%/users/%USERNAME%" "%DRIVEB%/%BACKUPDIR%/%USERNAME%"
+ATTRIB -H -S "%DRIVEB%/%BACKUPDIR%/%USERNAME%"
+PAUSE
 CLS
-echo Backup of all your user files are now complete
-Echo Completed on %DATE% %TIME%
-pause
-exit
+ECHO Backup of all your user files are now complete
+ECHO Completed on %DATE% %TIME%
+PAUSE
+EXIT
