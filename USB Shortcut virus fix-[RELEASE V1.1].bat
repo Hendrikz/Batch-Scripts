@@ -52,29 +52,28 @@ IF EXIST *.lnk (
 	DEL *.lnk
 		ECHO Shortcut files deleted
 			PAUSE
-				GOTO LNKDELETED
+				GOTO SHORTCUTDEL
 				) ELSE (
 ECHO There is no shortcuts on your USB
 	CHOICE /C yn /M "Contunue with the virus scan ?"
-		IF ERRORLEVEL 1 SET CONZ=y
-		IF ERRORLEVEL 2 SET CONZ=n
+		IF ERRORLEVEL 1 SET CONTUNUE=y
+		IF ERRORLEVEL 2 SET CONTUNUE=n
 						)
-		IF %CONZ%==y GOTO LNKDELETED
+		IF %CONTUNUE%==y GOTO SHORTCUTDEL
 
 :EXIT
 CLS
 	ECHO Applacation will now close
 		PAUSE
-			GOTO EXIT
+			GOTO EXIT1
 			
-:LNKDELETED
+:SHORTCUTDEL
 CLS
 	ATTRIB -R -A -S -H /S /D
 		ECHO USB shortcut virus now removed
 		ECHO Please do a virus scan on this drive now to make sure its removed completly
 			PAUSE
 
-:EXIT
-ECHO Bat file will close now.
-PAUSE
+:EXIT1
+CLS
 EXIT
