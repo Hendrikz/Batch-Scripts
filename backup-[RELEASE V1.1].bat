@@ -77,23 +77,23 @@ if %USERFILES%==n GOTO ALLFILESBACKUP
 
 :ALLFILESBACKUP
 CLS
-XCOPY /R /E /H /Y /D /C /F "%DRIVE%/" "%DRIVEB%/%BACKUPDIR%"
-ATTRIB -H -S "%DRIVEB%/%BACKUPDIR%"
+XCOPY /R /E /H /Y /D /C /F "%DRIVE%/" "%DRIVEB%/%BACKUPDIR%" >> backup_log_%BACKUPDIR%_allfiles.txt
+ATTRIB -H -S "%DRIVEB%/%BACKUPDIR%" >> backup_log_%BACKUPDIR%_userfiles.txt
 PAUSE
 CLS
-ECHO Backup of all your files is now complete
-ECHO Completed on %DATE% %TIME%
+ECHO Backup of all your files is now complete >> backup_log_%BACKUPDIR%_userfiles.txt
+ECHO Completed on %DATE% %TIME% >> backup_log_%BACKUPDIR%_userfiles.txt
 PAUSE
 EXIT
 
 :USERFILESONLY
 CLS
 SET /p USERNAME= What is the USERNAME you want to backup?
-XCOPY /R /E /H /Y /C /D /F "%DRIVE%/users/%USERNAME%" "%DRIVEB%/%BACKUPDIR%/%USERNAME%"
-ATTRIB -H -S "%DRIVEB%/%BACKUPDIR%/%USERNAME%"
-PAUSE
+XCOPY /R /E /H /Y /C /D /F "%DRIVE%/users/%USERNAME%" "%DRIVEB%/%BACKUPDIR%/%USERNAME%" >> backup_log_%BACKUPDIR%_userfiles.txt
+ATTRIB -H -S "%DRIVEB%/%BACKUPDIR%/%USERNAME%" >> backup_log_%BACKUPDIR%_userfiles.txt
+PAUSE 
 CLS
-ECHO Backup of all your user files are now complete
-ECHO Completed on %DATE% %TIME%
+ECHO Backup of all your user files are now complete >> backup_log_%BACKUPDIR%_userfiles.txt
+ECHO Completed on %DATE% %TIME% >> backup_log_%BACKUPDIR%_userfiles.txt
 PAUSE
 EXIT
